@@ -135,6 +135,23 @@ nodePipeline()
     5. Script Path:         Jenkinsfile
 3. Click apply and save.
 
+
+### Configure Jenkins & GitHub Integration
+
+#### A. Create a Classic Personal Access Token on GitHub On your GitHub Account,
+1. Click on the User Account
+2. Click on Settings
+3. Developer settings, and select Personal access tokens and Click Tokens (classic)
+4. Generate new token, and select Generate new token (classic) Note: jenkins-shared-lib, Expiration: 90 days, and Scopes (select the following): repo, admin:repo_hook (For Webhooks) Generate token & save it somewhere safe
+
+
+#### B. Add the GitHub Personal Access Token to Jenkins Credentials On the Jenkins UI,
+1. Click on Manage Jenkins
+2. Click Credentials
+3. Under System, click global, and Add Credentials
+4. Select Kind: "Username with password", Scope: Global, Password: "Paste the jenkins-shared-lib" here, ID: "jenkins-shared-lib", and Description: "jenkins-shared-lib". Create.
+
+
 ### Configure GitHub Webhook for Auto-Triggers
 1. In nodejs-app GitHub repo: click Settings > Webhooks > Add webhook. 
 2. Payload URL:     Your jenkins server must be reachable on the public internet. Unfortunately, localhost is not so we will use the tool NGROK to expose Jenkins server on the public internet for our case. Here are the steps to follow:
@@ -168,22 +185,6 @@ From the output:
 7. Add Webhook.
 
 Do not forget to change all http://localhost:8080 to https://92f8f2d8f6f2.ngrok-free.app in the Jenkins set up.
-
-
-### Configure Jenkins & GitHub Integration
-
-#### A. Create a Classic Personal Access Token on GitHub On your GitHub Account,
-1. Click on the User Account
-2. Click on Settings
-3. Developer settings, and select Personal access tokens and Click Tokens (classic)
-4. Generate new token, and select Generate new token (classic) Note: jenkins-shared-lib, Expiration: 90 days, and Scopes (select the following): repo, admin:repo_hook (For Webhooks) Generate token & save it somewhere safe
-
-
-#### B. Add the GitHub Personal Access Token to Jenkins Credentials On the Jenkins UI,
-1. Click on Manage Jenkins
-2. Click Credentials
-3. Under System, click global, and Add Credentials
-4. Select Kind: "Username with password", Scope: Global, Password: "Paste the jenkins-shared-lib" here, ID: "jenkins-shared-lib", and Description: "jenkins-shared-lib". Create.
 
 
 ### Run and Test the Pipeline
